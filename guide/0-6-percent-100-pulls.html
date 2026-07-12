@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>0.6% 뽑기를 100번 하면 정말 한 번은 나올까 | 예열 뽑기</title>
+<meta name="description" content="0.6% 확률로 100번을 뽑으면 기댓값은 0.6번입니다. 그런데 100번을 전부 실패할 확률이 54.7%입니다. 절반이 넘는 사람이 못 뽑는 이유를 계산으로 확인합니다.">
+<link rel="canonical" href="https://preheat-gacha.pages.dev/guide/0-6-percent-100-pulls.html">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#0b0d17">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="예열 뽑기">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:url" content="https://preheat-gacha.pages.dev/guide/0-6-percent-100-pulls.html">
+<meta property="og:title" content="0.6% 뽑기를 100번 하면 정말 한 번은 나올까">
+<meta property="og:description" content="100번을 전부 실패할 확률이 54.7%입니다. 절반이 넘는 사람이 못 뽑습니다.">
+<meta property="og:image" content="https://preheat-gacha.pages.dev/og.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "0.6% 뽑기를 100번 하면 정말 한 번은 나올까",
+  "description": "0.6% 확률로 100번을 뽑아도 절반이 넘는 사람이 실패합니다. 그 이유를 계산으로 확인합니다.",
+  "inLanguage": "ko",
+  "datePublished": "2026-07-13",
+  "dateModified": "2026-07-13",
+  "mainEntityOfPage": "https://preheat-gacha.pages.dev/guide/0-6-percent-100-pulls.html",
+  "publisher": { "@type": "Organization", "name": "예열 뽑기" }
+}
+</script>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-brand" href="/">예열 뽑기</a>
+  <div class="nav-links">
+    <a href="/">시뮬레이터</a>
+    <a href="/guide/">확률 이야기</a>
+    <a href="/about.html">소개</a>
+  </div>
+</nav>
+
+<main class="doc article">
+  <p class="crumb"><a href="/guide/">확률 이야기</a></p>
+  <h1>0.6% 뽑기를 100번 하면 정말 한 번은 나올까</h1>
+  <p class="doc-meta">2026년 7월 13일</p>
+
+  <p class="lead">확률이 0.6%다. 100번을 뽑는다. 0.6 × 100 = 60%… 가 아니라 "대충 한 번은 나오겠지". 많은 사람이 이렇게 생각하고 100연차를 지릅니다. 그리고 상당수가 빈손으로 끝납니다. 이건 운이 나빠서가 아니라, 계산이 원래 그렇습니다.</p>
+
+  <h2>기댓값은 정직하다. 그리고 오해를 부른다</h2>
+  <p>0.6% 확률로 100번을 뽑을 때, 뽑히는 횟수의 <strong>기댓값은 0.6번</strong>입니다. 0.006 × 100 = 0.6. 여기까지는 직관과 맞습니다. 문제는 "기댓값 0.6번"을 사람들이 "거의 한 번"으로 읽는다는 겁니다.</p>
+  <p>기댓값은 <strong>평균</strong>이지 <strong>보장</strong>이 아닙니다. 0.6번이라는 값은 "0번 뽑은 사람이 아주 많고, 1번 뽑은 사람이 좀 있고, 2번 뽑은 운 좋은 사람이 아주 조금 있어서, 전부 평균 내면 0.6"이라는 뜻입니다. 실제로 가장 흔한 결과는 <strong>0번</strong>입니다.</p>
+
+  <h2>100번 전부 실패할 확률을 직접 계산해보자</h2>
+  <p>한 번 실패할 확률은 1 − 0.006 = 0.994입니다. 매 뽑기가 독립이라면, 100번 연속 실패할 확률은 이걸 100번 곱한 값입니다.</p>
+  <p class="formula">0.994<sup>100</sup> ≈ <strong>0.547</strong></p>
+  <p><strong>약 54.7%.</strong> 절반이 넘습니다. 0.6% 뽑기를 100번 돌린 사람 100명 중 <strong>55명은 아무것도 못 건집니다.</strong> 뽑을 확률은 45.3%로, 동전 던지기보다 낮습니다.</p>
+  <p>많은 사람이 "100번이면 웬만하면 나오지"라고 생각하는 지점에서, 실제로는 <strong>절반 이상이 실패하는 게 정상</strong>이라는 뜻입니다. 커뮤니티에 "100연차 꽝"이라는 글이 끊이지 않는 이유가 이겁니다. 그 사람들은 특별히 운이 나쁜 게 아닙니다. 그냥 다수입니다.</p>
+
+  <h2>그럼 몇 번을 뽑아야 "웬만하면" 나오나</h2>
+  <p>성공 확률이 50%를 넘으려면 몇 번이 필요한지 뒤집어 계산할 수 있습니다. 0.994<sup>n</sup> &lt; 0.5가 되는 n을 찾으면 됩니다.</p>
+  <table>
+    <thead>
+      <tr><th>뽑기 횟수</th><th>한 번이라도 뽑을 확률</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>50회</td><td>약 26.0%</td></tr>
+      <tr><td>100회</td><td>약 45.3%</td></tr>
+      <tr><td>116회</td><td>약 50.3% <span class="note">← 여기서 겨우 절반</span></td></tr>
+      <tr><td>200회</td><td>약 70.1%</td></tr>
+      <tr><td>300회</td><td>약 83.6%</td></tr>
+      <tr><td>500회</td><td>약 95.1%</td></tr>
+    </tbody>
+  </table>
+  <p>"거의 확실히"라고 부를 만한 95%에 도달하려면 <strong>500번</strong>을 뽑아야 합니다. 100번의 다섯 배입니다.</p>
+
+  <h2>확률은 쌓이지 않는다</h2>
+  <p>여기서 가장 중요한 사실입니다. <strong>뽑기는 앞의 결과를 기억하지 못합니다.</strong> 99번 연속으로 실패했어도, 100번째 뽑기의 확률은 여전히 0.6%입니다. 첫 번째 뽑기와 똑같습니다.</p>
+  <p>"이만큼 실패했으니 이제 나올 때가 됐다"는 생각을 <strong>도박사의 오류</strong>라고 부릅니다. 동전을 아홉 번 던져 전부 앞면이 나와도, 열 번째가 뒷면일 확률은 여전히 절반입니다. 동전은 앞의 아홉 번을 모릅니다.</p>
+  <p>확률이 실제로 올라가는 경우는 딱 하나입니다. <strong>게임이 소프트 천장을 넣어줬을 때.</strong> 이건 확률이 저절로 쌓이는 게 아니라, 게임사가 코드로 "몇 회차부터는 확률을 올려준다"고 정해둔 겁니다. 자연법칙이 아니라 게임 설계입니다.</p>
+
+  <h2>그래서 천장이 있는 것이다</h2>
+  <p>위 계산이 천장 시스템이 존재하는 이유를 설명합니다. 순수 확률만 두면 500번을 뽑고도 못 건지는 사람이 5%씩 나옵니다. 그 경험은 게임을 그만두게 만듭니다. 그래서 대부분의 가챠 게임은 <strong>N회에 도달하면 무조건 준다</strong>는 하드 천장과, 그 직전부터 확률을 끌어올리는 소프트 천장을 넣습니다.</p>
+  <p>천장이 있는 게임에서는 위의 암울한 숫자가 그대로 적용되지 않습니다. 예를 들어 기본 확률 0.6%에 74회부터 소프트 천장이 붙고 90회에 하드 천장이 있는 구조라면, <strong>평균 뽑기 횟수는 약 62회</strong>로 떨어집니다. 90회를 다 채우는 사람은 소수입니다.</p>
+  <p>자신이 하는 게임의 확률과 천장을 <a href="/">시뮬레이터</a>에 넣어보면, 이 숫자가 실제로 얼마나 달라지는지 바로 확인할 수 있습니다. 그리고 직접 돌려볼 수도 있습니다. 물론 돈은 들지 않습니다.</p>
+
+  <h2>정리</h2>
+  <ul>
+    <li>0.6% × 100회의 기댓값은 0.6번이지만, <strong>가장 흔한 결과는 0번</strong>입니다.</li>
+    <li>100번 전부 실패할 확률은 <strong>약 54.7%</strong>. 절반이 넘습니다.</li>
+    <li>성공 확률이 절반을 넘으려면 <strong>116번</strong>, 95%에 닿으려면 <strong>500번</strong>이 필요합니다.</li>
+    <li>확률은 쌓이지 않습니다. 확률이 오르는 건 <strong>소프트 천장이 있을 때뿐</strong>입니다.</li>
+    <li>천장이 있는 게임이라면 이야기가 달라집니다. 자기 게임의 숫자로 직접 계산해보는 게 가장 정확합니다.</li>
+  </ul>
+
+  <p class="cta"><a href="/">→ 내 게임 확률로 직접 돌려보기</a></p>
+</main>
+
+<footer>
+  <p><a href="/">시뮬레이터</a> · <a href="/guide/">확률 이야기</a> · <a href="/about.html">소개</a> · <a href="/privacy.html">개인정보처리방침</a></p>
+  <p>이 사이트는 어떤 게임사와도 관련이 없습니다.</p>
+</footer>
+
+</body>
+</html>
