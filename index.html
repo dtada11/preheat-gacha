@@ -3,9 +3,72 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>예열 뽑기 — 진짜 가챠 전에 돌려보는 운세 시뮬레이터</title>
-<meta name="description" content="진짜 뽑기 전에 여기서 먼저 돌리세요. 오늘의 운이 상위 몇 %인지 판정해드립니다. 돈 안 드는 가챠, 예열 뽑기.">
+<title>예열 뽑기 — 가챠 뽑기 시뮬레이터 · 천장 확률 계산기</title>
+<meta name="description" content="진짜 뽑기 전에 여기서 먼저 돌려보세요. 확률과 천장을 넣으면 뽑기를 시뮬레이션하고, 당신의 운이 상위 몇 %인지 판정합니다. 무료·설치 불필요·결제 없음.">
+<link rel="canonical" href="https://preheat-gacha.pages.dev/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#0b0d17">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="예열 뽑기">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:url" content="https://preheat-gacha.pages.dev/">
+<meta property="og:title" content="예열 뽑기 — 가챠 뽑기 시뮬레이터 · 천장 확률 계산기">
+<meta property="og:description" content="진짜로 지르기 전에, 여기서 먼저 돌려보세요. 오늘 당신의 운이 상위 몇 %인지 알려드립니다.">
+<meta property="og:image" content="https://preheat-gacha.pages.dev/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="예열 뽑기 — 가챠 뽑기 시뮬레이터">
+<meta name="twitter:description" content="진짜로 지르기 전에, 여기서 먼저 돌려보세요. 오늘 당신의 운이 상위 몇 %인지 알려드립니다.">
+<meta name="twitter:image" content="https://preheat-gacha.pages.dev/og.png">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "예열 뽑기",
+      "url": "https://preheat-gacha.pages.dev/",
+      "applicationCategory": "GameApplication",
+      "operatingSystem": "All",
+      "inLanguage": "ko",
+      "description": "확률과 천장을 입력하면 가챠 뽑기를 시뮬레이션하고 운을 백분위로 판정하는 무료 웹 도구.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "예열 뽑기가 뭔가요?",
+          "acceptedAnswer": { "@type": "Answer", "text": "진짜 가챠를 돌리기 전에 다른 곳에서 먼저 뽑아보며 그날의 운을 가늠하는 습관입니다. 이 사이트는 그 자리를 대신합니다. 돈이 들지 않고 결제도 일어나지 않습니다." }
+        },
+        {
+          "@type": "Question",
+          "name": "0.6% 뽑기를 100번 하면 반드시 한 번은 나오나요?",
+          "acceptedAnswer": { "@type": "Answer", "text": "아닙니다. 100번 모두 실패할 확률은 약 54.7%입니다. 절반이 넘는 사람이 100번을 돌리고도 못 뽑습니다. 확률은 시행을 거듭한다고 쌓이지 않습니다." }
+        },
+        {
+          "@type": "Question",
+          "name": "천장과 소프트 천장은 무엇이 다른가요?",
+          "acceptedAnswer": { "@type": "Answer", "text": "천장(하드 천장)은 정해진 횟수에 도달하면 무조건 나오게 하는 장치입니다. 소프트 천장은 그 직전 구간부터 확률이 조금씩 올라가는 장치입니다. 그래서 실제 평균 뽑기 횟수는 천장 횟수보다 훨씬 작습니다." }
+        },
+        {
+          "@type": "Question",
+          "name": "여기서 나온 결과가 실제 뽑기에 영향을 주나요?",
+          "acceptedAnswer": { "@type": "Answer", "text": "전혀 없습니다. 이 사이트의 난수와 게임의 난수는 아무 관계가 없습니다. 재미와 욕구 해소를 위한 도구입니다." }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -114,6 +177,36 @@
   <p class="hint">같은 확률로 10,000명이 뽑았을 때 몇 번째에 나왔는지. 당신 위치가 빨간 선입니다.</p>
   <canvas id="chart" width="900" height="240"></canvas>
   <div class="chart-legend" id="chartLegend">한 번 성공시키면 내 위치가 표시됩니다.</div>
+</section>
+
+<!-- ========== 5. 읽을거리 ========== -->
+<section class="panel faq">
+  <h2>자주 묻는 것</h2>
+
+  <details open>
+    <summary>예열 뽑기가 뭔가요?</summary>
+    <p>진짜 가챠를 돌리기 전에 다른 데서 먼저 뽑아보며 그날의 운을 가늠하는 습관입니다. 가챠를 오래 한 사람이라면 한 번쯤 해봤을 겁니다. 이 사이트는 그 자리를 대신합니다. <strong>돈이 들지 않고, 결제도 일어나지 않습니다.</strong></p>
+  </details>
+
+  <details>
+    <summary>0.6% 뽑기를 100번 하면 반드시 한 번은 나오나요?</summary>
+    <p>아닙니다. 100번을 전부 실패할 확률이 <strong>약 54.7%</strong>입니다. 절반이 넘는 사람이 100번을 돌리고도 못 뽑는다는 뜻입니다. 확률은 시행을 거듭한다고 차곡차곡 쌓이지 않습니다. 매 뽑기는 앞의 결과를 기억하지 못합니다.</p>
+  </details>
+
+  <details>
+    <summary>천장과 소프트 천장은 뭐가 다른가요?</summary>
+    <p><strong>천장(하드 천장)</strong>은 정해진 횟수에 도달하면 무조건 나오게 하는 장치입니다. <strong>소프트 천장</strong>은 그 직전 구간부터 확률이 조금씩 올라가는 장치고요. 소프트 천장이 있으면 실제 평균 뽑기 횟수가 천장 횟수보다 훨씬 작아집니다. 위의 "냉정한 숫자"가 그걸 계산해줍니다.</p>
+  </details>
+
+  <details>
+    <summary>"이번엔 나올 때가 됐다"는 게 맞는 말인가요?</summary>
+    <p>틀린 말입니다. <strong>도박사의 오류</strong>라고 부릅니다. 90번 연속으로 실패했어도, 소프트 천장이 없다면 91번째 확률은 여전히 첫 번째와 똑같습니다. 확률이 실제로 오르는 건 게임이 소프트 천장을 넣어줬을 때뿐입니다.</p>
+  </details>
+
+  <details>
+    <summary>여기서 나온 결과가 실제 뽑기에 영향을 주나요?</summary>
+    <p><strong>전혀 없습니다.</strong> 이 사이트의 난수와 게임 서버의 난수는 아무 관계가 없습니다. 여기서 대운이 떴다고 실제로 잘 뽑히지 않고, 최하위권이 떴다고 실제로 안 나오는 것도 아닙니다. 재미와 욕구 해소를 위한 도구입니다.</p>
+  </details>
 </section>
 
 </main>

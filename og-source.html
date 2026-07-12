@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>og source</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1200px; height: 630px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 22px;
+    background:
+      radial-gradient(900px 500px at 50% 0%, #2c2560 0%, transparent 60%),
+      radial-gradient(700px 400px at 90% 100%, #1b2a4a 0%, transparent 55%),
+      #0b0d17;
+    color: #e8eaf2;
+    font-family: "Pretendard", "Malgun Gothic", sans-serif;
+    overflow: hidden;
+  }
+  h1 {
+    font-size: 104px; font-weight: 800; letter-spacing: -0.04em;
+    background: linear-gradient(120deg, #fff 20%, #ffc95c 60%, #ff8a3d 95%);
+    -webkit-background-clip: text; color: transparent;
+  }
+  p { font-size: 34px; color: #a7aecb; font-weight: 600; }
+  p strong { color: #fff; }
+  .orbs { display: flex; gap: 14px; margin-top: 10px; }
+  .o { width: 44px; height: 44px; border-radius: 50%;
+       background: radial-gradient(circle at 32% 30%, #4c5170, #23263a); }
+  .o.hit {
+    background: radial-gradient(circle at 32% 30%, #fff2cc, #ffc95c 45%, #ff8a3d);
+    box-shadow: 0 0 40px rgba(255,201,92,.9), 0 0 90px rgba(255,138,61,.55);
+  }
+  .tag { margin-top: 18px; font-size: 24px; color: #ffc95c;
+         border: 1px solid rgba(255,201,92,.45); border-radius: 999px; padding: 10px 26px; }
+</style>
+</head>
+<body>
+  <h1>예열 뽑기</h1>
+  <p>진짜로 지르기 전에, <strong>여기서 먼저 돌려보세요.</strong></p>
+  <div class="orbs">
+    <div class="o"></div><div class="o"></div><div class="o"></div>
+    <div class="o"></div><div class="o"></div><div class="o"></div>
+    <div class="o hit"></div>
+  </div>
+  <div class="tag">오늘 당신의 운은 상위 몇 %일까</div>
+</body>
+</html>

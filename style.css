@@ -314,6 +314,40 @@ label.check span { color: var(--text); }
 }
 .chart-legend { margin-top: 10px; font-size: 0.82rem; color: var(--muted); text-align: center; }
 
+/* ---------- FAQ ---------- */
+.faq h2 { margin-bottom: 14px; }
+.faq details {
+  border-top: 1px solid var(--line);
+  padding: 14px 0;
+}
+.faq details:last-child { padding-bottom: 0; }
+.faq summary {
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.95rem;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  user-select: none;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::before {
+  content: "＋";
+  color: var(--gold);
+  font-weight: 700;
+  flex: 0 0 auto;
+}
+.faq details[open] summary::before { content: "－"; }
+.faq summary:hover { color: var(--gold); }
+.faq details p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-top: 10px;
+  padding-left: 26px;
+}
+.faq details p strong { color: var(--text); }
+
 footer {
   max-width: 940px;
   margin: 40px auto 0;
