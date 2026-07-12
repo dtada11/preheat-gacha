@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>예열 뽑기 — 진짜 가챠 전에 돌려보는 운세 시뮬레이터</title>
+<meta name="description" content="진짜 뽑기 전에 여기서 먼저 돌리세요. 오늘의 운이 상위 몇 %인지 판정해드립니다. 돈 안 드는 가챠, 예열 뽑기.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hero">
+  <h1>예열 뽑기</h1>
+  <p class="sub">진짜로 지르기 전에, <strong>여기서 먼저 돌려보세요.</strong><br>오늘 당신의 운이 어느 정도인지 알려드립니다.</p>
+</header>
+
+<main>
+
+<!-- ========== 1. 메인: 뽑기 ========== -->
+<section class="panel panel-main">
+  <div class="counter">
+    <span id="pullCount">0</span><span class="counter-unit">회 뽑음</span>
+    <span class="pity" id="pityText">천장까지 90회</span>
+  </div>
+
+  <div class="orbs" id="orbs">
+    <div class="empty-msg">버튼을 누르면 여기서 뽑힙니다. 결제는 일어나지 않습니다.</div>
+  </div>
+
+  <div class="buttons">
+    <button id="pull1" class="btn">1회</button>
+    <button id="pull10" class="btn btn-primary">10연차 뽑기</button>
+    <button id="pullAuto" class="btn btn-danger">나올 때까지</button>
+    <button id="reset" class="btn btn-ghost">다시</button>
+  </div>
+
+  <div class="verdict" id="verdict" hidden>
+    <div class="verdict-head" id="verdictHead"></div>
+    <div class="verdict-rank" id="verdictRank"></div>
+    <div class="verdict-omen" id="verdictOmen"></div>
+    <div class="verdict-note" id="verdictNote"></div>
+    <button class="btn btn-ghost btn-copy" id="copyBtn">결과 복사하기</button>
+  </div>
+
+  <div class="saved" id="saved" hidden>
+    이번 방문에서 <strong id="savedCount">0</strong>번 대리로 뽑았습니다. 실제 결제 <strong>0원</strong>.
+  </div>
+</section>
+
+<!-- ========== 2. 설정 (접힘) ========== -->
+<section class="panel">
+  <details class="setup" id="setupBox">
+    <summary>확률 설정 <span class="summary-now" id="summaryNow">0.6% · 천장 90회</span></summary>
+
+    <p class="hint">하는 게임의 확률표를 그대로 넣으세요. 어떤 게임이든 됩니다.</p>
+    <div class="grid">
+      <label>
+        <span>기본 확률 <em>(%)</em></span>
+        <input type="number" id="baseRate" value="0.6" min="0.01" max="100" step="0.01">
+      </label>
+      <label>
+        <span>천장 <em>(N회에 확정)</em></span>
+        <input type="number" id="hardPity" value="90" min="1" max="1000" step="1">
+      </label>
+      <label>
+        <span>보유 뽑기 횟수</span>
+        <input type="number" id="budget" value="70" min="0" max="1000" step="1">
+      </label>
+    </div>
+
+    <div class="grid">
+      <label>
+        <span>소프트 천장 시작 <em>(회)</em></span>
+        <input type="number" id="softStart" value="74" min="1" max="1000" step="1">
+      </label>
+      <label>
+        <span>회당 상승폭 <em>(%p)</em></span>
+        <input type="number" id="softInc" value="6" min="0" max="100" step="0.1">
+      </label>
+      <label class="check">
+        <input type="checkbox" id="softOn" checked>
+        <span>소프트 천장 사용</span>
+      </label>
+    </div>
+  </details>
+</section>
+
+<!-- ========== 3. 계산 (보조) ========== -->
+<section class="panel">
+  <h2>참고로, 냉정한 숫자</h2>
+  <p class="hint">기분과 별개로 확률이 실제로 말하는 것.</p>
+  <div class="statgrid">
+    <div class="stat">
+      <div class="stat-label">평균</div>
+      <div class="stat-value" id="evOut">—</div>
+      <div class="stat-foot">회에 뽑힘</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">절반은</div>
+      <div class="stat-value" id="medianOut">—</div>
+      <div class="stat-foot">회 안에 뽑음</div>
+    </div>
+    <div class="stat highlight">
+      <div class="stat-label">보유분으로 뽑을 확률</div>
+      <div class="stat-value" id="cdfOut">—</div>
+      <div class="stat-foot" id="cdfFoot">—</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 4. 만 명 분포 ========== -->
+<section class="panel">
+  <h2>만 명이 같이 뽑으면</h2>
+  <p class="hint">같은 확률로 10,000명이 뽑았을 때 몇 번째에 나왔는지. 당신 위치가 빨간 선입니다.</p>
+  <canvas id="chart" width="900" height="240"></canvas>
+  <div class="chart-legend" id="chartLegend">한 번 성공시키면 내 위치가 표시됩니다.</div>
+</section>
+
+</main>
+
+<footer>
+  <p>이 사이트는 어떤 게임사와도 관련이 없습니다. 확률 수치는 사용자가 직접 입력한 값이고, 아무것도 저장하거나 전송하지 않습니다. 여기서 나온 결과는 실제 뽑기 결과와 아무 관계가 없습니다.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
